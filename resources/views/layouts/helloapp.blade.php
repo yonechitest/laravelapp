@@ -17,6 +17,9 @@
     </style>
   </head>
   <body>
+  @if(isset($counter))
+  ようこそ！あなたは{{$counter[0]->counter}}人目の訪問者です。
+  @endif
     <h1>@yield('title')</h1>
     @section('menubar')
     <ul>

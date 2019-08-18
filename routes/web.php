@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('top','PersonController@show');
+//★デプロイ時有効にする
+//Route::get('top', function () {return view('deploying');});
+
+
+Route::get('top','AppMainController@show');
 
 Route::get('person/add', 'PersonController@add');
 Route::post('person/add', 'PersonController@create');

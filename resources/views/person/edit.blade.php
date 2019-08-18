@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-	<a href="{{ action('PersonController@show') }}" >もどる</a>
+	<a href="{{ action('AppMainController@show') }}" >もどる</a>
     @if (count($errors) > 0)
 <p>入力に問題があります。再入力してください。</p>
     @endif

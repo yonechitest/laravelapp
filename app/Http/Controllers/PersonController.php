@@ -11,13 +11,14 @@ use Validator;
 
 class PersonController extends Controller
 {
-	public function show(Request $request){
 
+	public function show(Request $request){
 		$page = $request->page;
 		$items = DB::table('people')
 			->get();
 		return view('person.show', ['items' => $items]);
     }
+
 
     public function find(Request $request)
     {

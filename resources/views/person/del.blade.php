@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-	<a href="{{ action('PersonController@show') }}" >もどる</a>
+	<a href="{{ action('AppMainController@show') }}" >もどる</a>
     <table>
     <form action="/person/del" method="post">
        {{ csrf_field() }}
