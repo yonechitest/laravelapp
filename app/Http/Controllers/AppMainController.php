@@ -14,7 +14,6 @@ class AppMainController extends Controller
     public function show(Request $request){
 	
 
-
 		//セッション情報がない時のみ訪問者カウンターをインクリメントする
 		if ("session" !== $request->session()->get('sessionkey')){
 
@@ -22,13 +21,18 @@ class AppMainController extends Controller
 
 			$application = application::find(1);
 			$application->increment('counter', 1);
-
 		}
 		
-		$counter = application::all();
-
-		$items = DB::table('people')->get();
+		//非ソート時(初期アクセス時)DB登録順にソート
+		$sort = $request->sort;
+		if(empty($sort)){
+			$sort = 'id';
+		}
 		
-		return view('person.show', ['items' => $items, 'counter' => $counter]);
+		$items = Person::orderBy($sort, 'asc')->Paginate(5);
+
+
+		$counter = application::all();
+		return view('person.show', ['items' => $items, 'counter' => $counter, 'sort' => $sort]);
     }
 }

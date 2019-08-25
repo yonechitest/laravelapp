@@ -8,11 +8,13 @@
 @endsection
 
 @section('content')
-@section('content')
-
 <a href="{{ action('PersonController@add') }}" >新規作成</a>
 <table>
-<tr><th>Name</th><th>Mail</th><th>Age</th></tr>
+<tr>
+    <th><a href="/top?sort=name">Name</a></th>
+    <th><a href="/top?sort=mail">Mail</a></th>
+    <th><a href="/top?sort=age">Age</a></th>
+</tr>
 @foreach ($items as $item)
 <tr>
 <td>{{$item->name}}</td>
@@ -23,6 +25,8 @@
 </tr>
 @endforeach
 </table>
+<br>
+{{$items->appends(['sort' => $sort ])->links()}}
 @endsection
 
 @section('footer')

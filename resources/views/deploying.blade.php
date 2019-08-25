@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                from 2019/08/18 15:13～
+                from 2019/08/25 16:41～
                 </div>
             </div>
         </div>
