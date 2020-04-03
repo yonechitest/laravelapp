@@ -1,0 +1,27 @@
+
+.CalcArea {
+    border: 2px solid ; 
+    padding: 0.5em;
+    background-color: snow;
+    width: 12em;
+    margin: 30px 50px 40px 50px;
+    text-align: right;
+}
+
+.SymbolArea {
+    border: 2px solid ;
+    padding: 0.5em;
+    background-color: snow;
+    width: 8em;
+    margin: 30px 40px 40px 40px;
+}
+
+.buttonArea{
+    margin: 0px 40px 60px 40px;
+}
+
+.button{
+    margin: 5px 25px 5px 25px;
+    width: 6em; 
+    height: 2em;
+}
