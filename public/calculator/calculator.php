@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/calculator.css">
     </head>
     <body>
-        <form action="CalcuExe.php" method="POST">
+        <form action="calculator/calcuexe.php" method="POST">
         <input type="text" name="value1" id="value1" class="CalcArea" value="<?php if(isset($calcu))echo($calcu->getVal1()) ?>" size="10" maxlengh="10" >
         <select name="operand" class="SymbolArea">
             <option value=""></option>
