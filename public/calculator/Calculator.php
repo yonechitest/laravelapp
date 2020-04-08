@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/calculator.css">
     </head>
     <body>
-        <div> <?php if(isset($calcu) && $calcu->isCorrectmaxlength())echo("入力桁数は".Calculate::MAXLENGTH."桁未満にしてください") ?> </div>
+        <div> <?php if(isset($calcu) && $calcu->iserror())echo($calcu->getErrormessage()) ?> </div>
         <form action="Calcuexe.php" method="POST">
         <input type="text" name="value1" id="value1" class="CalcArea" value="<?php if(isset($calcu))echo($calcu->getVal1()) ?>" size="10" maxlengh="10" >
         <select name="operand" class="SymbolArea">
