@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/calculator.css">
     </head>
     <body>
+        <div> <?php if(isset($calcu) && $calcu->isCorrectmaxlength())echo("入力桁数は".Calculate::MAXLENGTH."桁未満にしてください") ?> </div>
         <form action="Calcuexe.php" method="POST">
         <input type="text" name="value1" id="value1" class="CalcArea" value="<?php if(isset($calcu))echo($calcu->getVal1()) ?>" size="10" maxlengh="10" >
         <select name="operand" class="SymbolArea">
@@ -34,13 +35,13 @@
                 <td><button class="Button" type="button" onclick="setNum(6)" value="6">6</button></td>
                 </tr>
             <tr>
-                <td><button class="Button" type="button" onclick="setNum('1')" value="1">1</button></td>
+                <td><button class="Button" type="button" onclick="setNum(1)" value="1">1</button></td>
                 <td><button class="Button" type="button" onclick="setNum(2)" value="2">2</button></td>
                 <td><button class="Button" type="button" onclick="setNum(3)" value="3">3</button></td>
             </tr>
             <tr>
                 <td></td>
-                <td><button class="Button" type="button" onclick="setNum()" value="0">0</button></td>
+                <td><button class="Button" type="button" onclick="setNum(0)" value="0">0</button></td>
                 <td><input class="Button"  type="submit" value="="></td>
             </tr>
         </table>
@@ -50,12 +51,15 @@
     <script>
         function setNum(val){
 
-            //入力エリアには2桁まで入力可能にさせる
-            if( $("#value1").val().length < 2 ) {
+            //最大入力桁数
+            const maxlength = 2;
+
+            //最大入力桁数まで入力可能にさせる
+            if( $("#value1").val().length < maxlength ) {
                 var dispval = $("#value1").val() + val;
                 $("#value1").val(dispval);
 
-            }else if( $("#value2").val().length < 2 ){
+            }else if( $("#value2").val().length < maxlength ){
                 var dispval = $("#value2").val() + val;
                 $("#value2").val(dispval);
             }

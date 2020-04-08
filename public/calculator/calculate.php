@@ -11,6 +11,10 @@ class Calculate {
     const ADD = 'add';
     const SUBTRACT = 'subtract';
 
+    //入力可能な最大桁数
+    const MAXLENGTH = '2';
+    private $iscorrectmaxlength = true;
+
 
 
     //コンストラクタ
@@ -40,7 +44,26 @@ class Calculate {
         return $this->result;
     }
 
+    //入力桁チェック異常時false設定
+    public function setFalselengthvalidate() {
+        $this->iscorrectmaxlength　= false;
+    }
 
+    //最大桁数チェック結果
+    public function isCorrectmaxlength() {
+        return $this->iscorrectmaxlength;
+    }
+
+
+    //入力値の最大桁数チェックし異常ならfalseをセット
+    public function valuevalidate(){
+        if( strlen($this->val1) > self::MAXLENGTH && strlen($this->val2) > self::MAXLENGTH ){
+            $this->setFalselengthvalidate();
+        }   
+        return $this->iscorrectmaxlength;
+    }
+
+    
     //実際に計算処理をする
     public function calcuexe(){
         if(is_numeric($this->val1) && is_numeric($this->val2)){
@@ -53,7 +76,6 @@ class Calculate {
                     break;
             }
         }
-
     }
 
 }
