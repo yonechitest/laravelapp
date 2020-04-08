@@ -13,7 +13,8 @@ class Calculate {
 
     //入力可能な最大桁数
     const MAXLENGTH = '2';
-    private $iscorrectmaxlength = true;
+    private $iserror = false;
+    private $errormessage = "";
 
 
 
@@ -44,38 +45,51 @@ class Calculate {
         return $this->result;
     }
 
-    //入力桁チェック異常時false設定
-    public function setFalselengthvalidate() {
-        $this->iscorrectmaxlength　= false;
+    //エラー判定
+    public function iserror() {
+        return $this->iserror;
     }
 
-    //最大桁数チェック結果
-    public function isCorrectmaxlength() {
-        return $this->iscorrectmaxlength;
+    //エラーメッセージ設定
+    public function getErrormessage() {
+        return $this->errormessage;
     }
+    
+    
 
-
-    //入力値の最大桁数チェックし異常ならfalseをセット
+    //入力値バリデーション
     public function valuevalidate(){
-        if( strlen($this->val1) > self::MAXLENGTH && strlen($this->val2) > self::MAXLENGTH ){
-            $this->setFalselengthvalidate();
+        //入力値が数字かどうかのチェック
+        if( !is_numeric($this->val1) || !is_numeric($this->val2)  ){
+            $this->errormessage = "数値を入力してください";
+            $this->iserror = true;
+            return true;
         }   
-        return $this->iscorrectmaxlength;
+
+        //入力値が最大桁数以下かチェック
+        if( strlen($this->val1) > self::MAXLENGTH || strlen($this->val2) > self::MAXLENGTH ){
+            $this->errormessage = "入力桁数は".self::MAXLENGTH."桁以下にしてください";
+            $this->iserror = true;
+            return true;
+        }   
+
+        return $this->iserror;
     }
+
+
 
     
     //実際に計算処理をする
     public function calcuexe(){
-        if(is_numeric($this->val1) && is_numeric($this->val2)){
-            switch ($this->operand) {
-                case self::ADD:
-                    $this->result = $this->val1 + $this->val2;
-                    break;
-                case self::SUBTRACT:
-                    $this->result = $this->val1 - $this->val2;
-                    break;
-            }
+        switch ($this->operand) {
+            case self::ADD:
+                $this->result = $this->val1 + $this->val2;
+                break;
+            case self::SUBTRACT:
+                $this->result = $this->val1 - $this->val2;
+                break;
         }
+        return;
     }
 
 }
