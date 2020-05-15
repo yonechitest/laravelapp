@@ -15,9 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//★デプロイ時有効にする
-//Route::get('top', function () {return view('deploying');});
-
+Route::get('calcu-app','Calculator\ClculatorController@index');
+Route::post('calcu-app','Calculator\ClculatorController@index');
 
 Route::get('top','AppMainController@show');
 
