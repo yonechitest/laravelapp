@@ -8,48 +8,60 @@
     
     <div class="disp-area">
         
-    <div class="num-disp">
-    <form action="/calcu-app" method="POST">
+    <form name="clcuform"  onSubmit="submitscript()">
     {{ csrf_field() }}
 
-        <input id="num-area" name="num-area" type="text" value="<?php if(isset($result))echo($result) ?>" maxlength="15">
-        <input id="num-area2" name="num-area2" value="" type="hidden" >
-        <dis class="operand" id="operand" name="operand" value=""></div>
-        <input type="hidden" id="operandValue" name="operandValue" value="">
+       <div class="num-input"> <input  id="num-area1" name="num-area1" type="text" value="<?php if(isset($result["answer"]))echo($result["answer"]) ?>" ></div>
+       <input type="hidden" id="request-val" name="request-val" value="">
+        <div class="num-input"><input id="num-area2" name="num-area2" value="<?php if(isset($result["formula"]))echo($result["formula"]) ?>" type="" ></div>
+                
 
-
-    </div>
     </div>
 
     <div class="button-area">
     <table  class="ButtonArea">
+                <tr>
+                <td><input class="button orange" type="button"  onclick="" value="設定"></td>
+                <td><input class="button orange" type="button" onclick="delValue()" value="DEL"></td>
+                <td><input class="button orange" type="button" onclick="" value="C"></td>
+                <td><input class="button gray" type="button" onclick="setNum('+')" value="+"></td>
+                </tr>
+
+                <tr>
+                <td><input class="button white" type="button" onclick="" value="%"></td>
+                <td><input class="button white"  type="button" onclick="setNum('(')" value="("></td>
+                <td><input class="button white" type="button" onclick="setNum(')')" value=")" ></td>
+                <td><input class="button gray" type="button" onclick="setNum('-')" value="−"></td>
+
+            </tr>
+
             <tr>
-                <td><button class="Button" type="button" onclick="setNum(7)" value="7">7</button></td>
-                <td><button class="Button" type="button" onclick="setNum(8)" value="8">8</button></td>
-                <td><button class="Button" type="button" onclick="setNum(9)" value="9">9</button></td>
-                <td><button class="Button" type="button" onclick="setOperand('+')" >+</button></td>
+                <td><input class="button white" type="button"  onclick="setNum(7)" value="7"></td>
+                <td><input class="button white" type="button" onclick="setNum(8)" value="8"></td>
+                <td><input class="button white" type="button" onclick="setNum(9)" value="9"></td>
+                <td><input class="button gray" type="button" onclick="setNum('×')" value="×"></td>
 
                 </tr>
             <tr>
-                <td><button class="Button" type="button" onclick="setNum(4)" value="4">4</button></td>
-                <td><button class="Button" type="button" onclick="setNum(5)" value="5">5</button></td>
-                <td><button class="Button" type="button" onclick="setNum(6)" value="6">6</button></td>
-                <td><button class="Button" type="button" onclick="setOperand('−')" >-</button></td>
+                <td><input class="button white" type="button" onclick="setNum(4)" value="4"></td>
+                <td><input class="button white" type="button" onclick="setNum(5)" value="5"></td>
+                <td><input class="button white" type="button" onclick="setNum(6)" value="6"></td>
+                <td><input class="button gray" type="button" onclick="setNum('÷')" value="÷"></td>
+
 
                 </tr>
             <tr>
-                <td><button class="Button" type="button" onclick="setNum(1)" value="1">1</button></td>
-                <td><button class="Button" type="button" onclick="setNum(2)" value="2">2</button></td>
-                <td><button class="Button" type="button" onclick="setNum(3)" value="3">3</button></td>
-                <td><button class="Button" type="button" onclick="setOperand('×')" >×</button></td>
-            </tr>
-            <tr>
-                <td><button class="Button" type="button" onclick="delValue()" >C</Canvas></button></td>
-                <td><button class="Button" type="button" onclick="setNum(0)" value="0">0</button></td>
-                <td><button class="Button"  type="submit" onclick="prepareaction()" value="=">=</td>
-                <td><button class="Button" type="button" onclick="setOperand('÷')" >÷</button></td>
+                <td><input class="button white" type="button" onclick="setNum(1)" value="1"></td>
+                <td><input class="button white" type="button" onclick="setNum(2)" value="2"></td>
+                <td><input class="button white" type="button" onclick="setNum(3)" value="3"></td>
+                <td rowspan="2"><input class="button gray" type="submit" value="="></td>
 
             </tr>
+            <tr>
+                <td colspan="2"><input class="button white" type="button" onclick="setNum(0)" value="0" ></td>
+                <td><input class="button white"  type="button" onclick="setNum('.')" value="."></td>
+            </tr>
+
         </table>
     </div>
 </form>
@@ -57,38 +69,121 @@
     <script>
         function setNum(val){
             //最大入力桁数
-            const maxlength = 15;
+            const maxlength = 50;
 
             //最大入力桁数まで入力可能にさせる
-            if( $("#num-area").val().length < maxlength || $("#operandValue").val() !== '') {
+            if( $("#num-area1").val().length < maxlength ) {
 
 
+            var operand = [,'×', '-', '+', '÷'];
+            var operandExceptMin = [,'+', '×', '÷'];
+            var lastClickVal = $("#num-area1").val().split('').pop();
 
-                if( $("#operandValue").val() !== ''){
+            //押したボタンが四則演算記号だった時and現在の入力されてる値が０桁じゃない時
+            if( operand.indexOf(val) > 0  && $("#num-area1").val().length !== 0){
 
-                    $("#num-area2").val($("#num-area").val()) ;
-                    $("#num-area").val('');
-                    $("#operandValue").val('')
+
+                //直前に入力した値が四則演算記号ではない時四則演算記号を入力する
+                if(operand.indexOf(lastClickVal) < 0){
+                    var dispval = $("#num-area1").val() + val;
+                    $("#num-area1").val(dispval);
+                //入力した値が減算記号だった時
+                }else if( val == "-" ){
+                    //直前に入力した値が減算記号じゃない時減算記号を入力
+                    if(lastClickVal !== "-"){
+                        var dispval = $("#num-area1").val() + val;
+                        $("#num-area1").val(dispval);
+                    }
+                //入力された値が減算記号以外の時
+                }else if( operandExceptMin.indexOf(val) > 0){
+                    //直前に入力した値が減算記号の時
+                    if(lastClickVal == "-"){
+                        return
+                    }
+                    var splitval = $("#num-area1").val().split('');//
+                    splitval.pop();
+                    splitval = splitval.join('');
+                    $("#num-area1").val(splitval);
+                    var dispval = $("#num-area1").val() + val;
+                    $("#num-area1").val(dispval);
+                }
+            //入力した値が減算記号だった時
+            }else if( val == "-" ){
+                var dispval = $("#num-area1").val() + val;
+                $("#num-area1").val(dispval);
             }
+            
+                //０～９のボタンが押された時
+                if($.isNumeric(val)){
+                    //既に入力されている値が０でない時
+                    if( $("#num-area1").val() !== "0"   ){
+                        var dispval = $("#num-area1").val() + val;
+                        $("#num-area1").val(dispval);
+                    //clickしたボタンが０でない時
+                    }else if( val !== 0 ){
+                        $("#num-area1").val("");
+                         $("#num-area1").val(val);
+                    }
+                }
 
-                if( val !== 0 || $("#num-area").val().length !== 0  ){
-                    var dispval = $("#num-area").val() + val;
-                    $("#num-area").val(dispval);
+                arrayValue = $("#num-area1").val().split('').reverse();
+                if(val == "." &&  $("#num-area1").val().length !== 0 && lastClickVal !== "(" && operand.indexOf(lastClickVal) < 0){
+                    ableDot = 1;
+                    operandFlg = 0;
+                    $.each(arrayValue, function(index, value){
+                        if(operand.indexOf(value) > 0){
+                            operandFlg = 1;
+                        }else if(value == "." ){
+                            if(operandFlg == 0){
+                                ableDot = 0;
+                            }
+                        }
+                    })
+
+                    if(lastClickVal !== "." && ableDot == 1){
+                    var dispval = $("#num-area1").val() + val;
+                    $("#num-area1").val(dispval);
+                    }
                 }
 
 
+                // if(val == "(" || val == ")"){
+                //     if(val == "("){
+
+                //         $.each(arrayValue, function(index, value){
+                //         if(value == ){
+                //             operandFlg = 1;
+                //         }else if(value == "." ){
+                //             if(operandFlg == 0){
+                //                 ableDot = 0;
+                //             }
+                //         }
+                //     })
+
+
+                //     }
+                //     var dispval = $("#num-area1").val() + val;
+                //     $("#num-area1").val(dispval);
+                // }
             }
         }
 
         //演算記号設定
-        function setOperand(val){
-                    $("#operand").text(val);
-                    $("#operandValue").val(val);
-        }
 
-        function prepareaction(){
-                    
-                    $("#operandValue").val($("#operand").text());
+
+        function submitscript(){
+                    arrayValue = $("#num-area1").val().split('');
+                    $.each(arrayValue, function(index, value){
+                        if(value == "×"){
+                            arrayValue[index] = "*";
+                        }else if(value == "÷"){
+                            arrayValue[index] = "/";
+                        }
+                    })
+                    arrayValue = arrayValue.join('');
+                    $("#request-val").val(arrayValue);
+                document.clcuform.method="POST";
+                document.clcuform.action="/calcu-app";
         }
 
         //DELボタンを押すと右から一桁ずつ削除する
@@ -96,15 +191,15 @@
             
             const maxlength = 15;
 
-            if($("#num-area").val().length !== 0){
-                var $val1 = $("#num-area").val();
+            if($("#num-area1").val().length !== 0){
+                var $val1 = $("#num-area1").val();
                 //value1の値が二桁の時
 
                 if( $val1.length <= maxlength ){
                     var $splitval = String($val1).split('');
                     $splitval.pop();
                     $splitval = $splitval.join('');
-                    $("#num-area").val($splitval);
+                    $("#num-area1").val($splitval);
                 //value1の値が一桁の時
                 }
 
