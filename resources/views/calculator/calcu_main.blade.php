@@ -8,7 +8,7 @@
     
     <div class="disp-area">
         
-    <form name="clcuform"  onSubmit="submitscript()">
+    <form id="submit" method="POST" action="/calcu-app">
     {{ csrf_field() }}
 
        <div class="num-input"> <input  id="num-area1" name="num-area1" type="text" value="<?php if(isset($result["answer"]))echo($result["answer"]) ?>" ></div>
@@ -23,30 +23,29 @@
                 <tr>
                 <td><input class="button orange" type="button"  onclick="" value="設定"></td>
                 <td><input class="button orange" type="button" onclick="delValue()" value="DEL"></td>
-                <td><input class="button orange" type="button" onclick="" value="C"></td>
+                <td><input class="button orange" type="button" id="clear" value="C"></td>
                 <td><input class="button gray" type="button" onclick="setNum('+')" value="+"></td>
                 </tr>
 
-                <tr>
+                <!-- <tr>
                 <td><input class="button white" type="button" onclick="" value="%"></td>
                 <td><input class="button white"  type="button" onclick="setNum('(')" value="("></td>
                 <td><input class="button white" type="button" onclick="setNum(')')" value=")" ></td>
                 <td><input class="button gray" type="button" onclick="setNum('-')" value="−"></td>
-
-            </tr>
+                </tr> -->
 
             <tr>
                 <td><input class="button white" type="button"  onclick="setNum(7)" value="7"></td>
                 <td><input class="button white" type="button" onclick="setNum(8)" value="8"></td>
                 <td><input class="button white" type="button" onclick="setNum(9)" value="9"></td>
-                <td><input class="button gray" type="button" onclick="setNum('×')" value="×"></td>
+                <td><input class="button gray" type="button" onclick="setNum('-')" value="−"></td>
 
                 </tr>
             <tr>
                 <td><input class="button white" type="button" onclick="setNum(4)" value="4"></td>
                 <td><input class="button white" type="button" onclick="setNum(5)" value="5"></td>
                 <td><input class="button white" type="button" onclick="setNum(6)" value="6"></td>
-                <td><input class="button gray" type="button" onclick="setNum('÷')" value="÷"></td>
+                <td><input class="button gray" type="button" onclick="setNum('×')" value="×"></td>
 
 
                 </tr>
@@ -54,12 +53,13 @@
                 <td><input class="button white" type="button" onclick="setNum(1)" value="1"></td>
                 <td><input class="button white" type="button" onclick="setNum(2)" value="2"></td>
                 <td><input class="button white" type="button" onclick="setNum(3)" value="3"></td>
-                <td rowspan="2"><input class="button gray" type="submit" value="="></td>
+                <!-- <td rowspan="2"> --><td><input class="button gray" type="button" onclick="setNum('÷')" value="÷"></td>
 
             </tr>
             <tr>
                 <td colspan="2"><input class="button white" type="button" onclick="setNum(0)" value="0" ></td>
                 <td><input class="button white"  type="button" onclick="setNum('.')" value="."></td>
+                <td><input class="button gray" type="submit" onclick="prepareaction()" value="="></td>
             </tr>
 
         </table>
@@ -67,9 +67,11 @@
 </form>
 
     <script>
+        var operand = [,'×', '-', '+', '÷'];
+
         function setNum(val){
             //最大入力桁数
-            const maxlength = 50;
+            const maxlength = 15;
 
             //最大入力桁数まで入力可能にさせる
             if( $("#num-area1").val().length < maxlength ) {
@@ -146,33 +148,33 @@
                     }
                 }
 
-
-                // if(val == "(" || val == ")"){
-                //     if(val == "("){
-
-                //         $.each(arrayValue, function(index, value){
-                //         if(value == ){
-                //             operandFlg = 1;
-                //         }else if(value == "." ){
-                //             if(operandFlg == 0){
-                //                 ableDot = 0;
-                //             }
-                //         }
-                //     })
-
-
-                //     }
-                //     var dispval = $("#num-area1").val() + val;
-                //     $("#num-area1").val(dispval);
-                // }
             }
         }
 
-        //演算記号設定
+            $('#submit').submit(function(){
 
 
-        function submitscript(){
+                    errorFlg=0;
                     arrayValue = $("#num-area1").val().split('');
+                    if( operand.indexOf(arrayValue[arrayValue.length-1]) > 0　&& errorFlg ==0){
+                        Swal.fire({ title: 'ERROR', html : 'formula is incomplete'
+                                    , position : 'center-start', width : '26rem'
+                                    , allowOutsideClick : false
+                            });
+                            errorFlg++;
+                    }
+
+                    $.each(arrayValue, function(index, value){
+                        if(value == "÷" && arrayValue[index+1] == "0" && errorFlg ==0){
+                            Swal.fire({ title: 'ERROR', html : 'Division by zero'
+                                    , position : 'center-start', width : '26rem'
+                                    , allowOutsideClick : false
+                            });
+                            errorFlg++;
+                        }
+                    })
+
+                    
                     $.each(arrayValue, function(index, value){
                         if(value == "×"){
                             arrayValue[index] = "*";
@@ -182,9 +184,13 @@
                     })
                     arrayValue = arrayValue.join('');
                     $("#request-val").val(arrayValue);
-                document.clcuform.method="POST";
-                document.clcuform.action="/calcu-app";
-        }
+
+                    if(errorFlg !== 0){
+                        return false;
+                    }
+})
+
+
 
         //DELボタンを押すと右から一桁ずつ削除する
         function delValue(){
@@ -204,11 +210,16 @@
                 }
 
             }
-
         }
 
+        $(function () {
+            $("#clear").click( function() {
+                $("#num-area1").val("");
+            });
+        });
 
         </script>
 
     
 @endsection
+
