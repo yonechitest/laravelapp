@@ -11,8 +11,8 @@
     <form id="submit" method="POST" action="/calcu-app">
     {{ csrf_field() }}
 
-       <div class="num-input"> <input  id="num-area1" name="num-area1" type="text" value="<?php if(isset($result["answer"]))echo($result["answer"]) ?>" ></div>
-       <input type="hidden" id="request-val" name="request-val" value="">
+       <div class="num-input"> <input  readonly id="num-area1" name="num-area1" type="text" value="<?php if(isset($result["answer"]))echo($result["answer"]) ?>" ></div>
+       <input  readonly type="hidden" id="request-val" name="request-val" value="">
         <div class="num-input"><input id="num-area2" name="num-area2" value="<?php if(isset($result["formula"]))echo($result["formula"]) ?>" type="" ></div>
                 
 
@@ -21,7 +21,7 @@
     <div class="button-area">
     <table  class="ButtonArea">
                 <tr>
-                <td><input class="button orange" type="button"  onclick="" value="設定"></td>
+                <td><input class="button orange" type="button"  onclick="" value=""></td>
                 <td><input class="button orange" type="button" onclick="delValue()" value="DEL"></td>
                 <td><input class="button orange" type="button" id="clear" value="C"></td>
                 <td><input class="button gray" type="button" onclick="setNum('+')" value="+"></td>
