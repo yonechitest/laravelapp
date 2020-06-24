@@ -30,3 +30,7 @@ Route::get('person/del', 'PersonController@delete');
 Route::post('person/del', 'PersonController@remove');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
