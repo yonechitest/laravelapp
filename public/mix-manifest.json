@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/crud/app.js": "/js/crud/app.js",
+    "/../resources/built/crud/css/crud.css": "/../resources/built/crud/css/crud.css",
+    "/css/app.css": "/css/app.css",
+    "/css/crud/app.css": "/css/crud/app.css"
 }

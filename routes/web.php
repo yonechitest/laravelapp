@@ -18,23 +18,16 @@ Route::get('/', function () {
 Route::get('calcu-app','Calculator\ClculatorController@index');
 Route::post('calcu-app','Calculator\ClculatorController@index');
 
-Route::get('top','AppMainController@show');
-
-Route::get('person/add', 'PersonController@add');
-Route::post('person/add', 'PersonController@create');
-
-Route::get('person/edit', 'PersonController@edit');
-Route::post('person/edit', 'PersonController@update');
-
-Route::get('person/del', 'PersonController@delete');
-Route::post('person/del', 'PersonController@remove');
-
-
+Route::get('my-crud','crud\MainPageController@showProducts');
+Route::post('my-crud','crud\MainPageController@searchProducts');
+Route::get('/my-crud/add','crud\MainPageController@addProduct');
+Route::post('my-crud/add','crud\MainPageController@createProduct');
+Route::get('my-crud/edit/{id?}', 'crud\MainPageController@editProduct');
+Route::post('my-crud/edit/{id?}', 'crud\MainPageController@updateProduct');
+Route::get('my-crud/delete/{id?}', 'crud\MainPageController@deleteProduct');
+Route::post('my-crud/delete/{id?}', 'crud\MainPageController@destroyProduct');
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
