@@ -1,5 +1,5 @@
 @extends('layouts.crud')
-@section('title', 'Edit Sushi🍣') 
+@section('title', 'Edit Ramen�') 
 
 
 @section('content')
@@ -8,12 +8,12 @@
 	
    	<div class="container">
 
-       <h1>🍣Sushi Ingredient🍣</a></h1>
+       <h1>�Ramen Ingredient�</a></h1>
 
 		<div class="card">
 			<div class="card-header">
-                <i class="fa fa-fw fa-plus-circle"></i> <strong>Add Sushi</strong> 
-                <a href="/my-crud" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-globe"></i> Search Sushi</a>
+                <i class="fa fa-fw fa-plus-circle"></i> <strong>Add Ramen</strong> 
+                <a href="/my-crud" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-globe"></i> Search Ramen</a>
             </div>
 			<div class="card-body">
 				
@@ -52,8 +52,8 @@
                     <div class="form-group">
 
                         <label> Note </label>
-                        <input type="text" name="note" class="form-control" id="note" value="{{old('note')}}" 
-                        placeholder="{{ $val->note }}" >
+                        <input type="text" name="note" class="form-control" id="note" value="{{ $val->note }}" 
+                        placeholder="" >
 
                         @foreach ($errors->get('note') as $message) 
                         <p class="text-danger"><i class="fa fa-fw text-warning fa-exclamation-triangle"></i>{{$note}}</p>
@@ -63,7 +63,7 @@
 
 						<div class="form-group">
 							<input type="hidden" name="editId" id="editId" value="">
-							<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-edit"></i> Update Sushi</button>
+							<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary"><i class="fa fa-fw fa-edit"></i> Update Ramen</button>
 						</div>
 					</form>
                     @endforeach

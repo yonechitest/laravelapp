@@ -45,5 +45,16 @@ class Product extends Model
         'creation_date',
     ];
 
+    // CREATE TABLE `product` (
+    //     `id` int(10) unsigned ZEROFILL NOT NULL AUTO_INCREMENT,
+    //     `name` varchar(50) NOT NULL,
+    //     `price` decimal(7,2) DEFAULT NULL,
+    //     `note` varchar(50) DEFAULT NULL,
+    //     `create_date` datetime NOT NULL COMMENT '(DC2Type:datetimetz)',
+    //     `update_date` datetime NOT NULL COMMENT '(DC2Type:datetimetz)',
+    //     `delete_date` datetime COMMENT '(DC2Type:datetimetz)',
+    //     PRIMARY KEY (`id`)
+    //   ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8
+    //INSERT INTO `product` (`name`,`price`,`note`,`create_date`,`update_date`,`delete_date`) VALUES ('商品','１２３４５６７８９０','１２３４５６７８９０','2050-12-31 00:00:00','2050-12-31 00:00:00',null);
 
 }

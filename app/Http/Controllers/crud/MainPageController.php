@@ -46,14 +46,19 @@ class MainPageController extends Controller
 
             foreach ($search_result as $value) {
                 $carbon = $this->dt->parse($value->create_date);
-                $value->create_date = $carbon->format('Y年m月d日');
+                $value->create_date = $carbon->format('Y/m/d');
             }
             $this->view_data['search_result'] = $search_result;
 
         }
+
+        //IDに使う連番を作成
+        $id =range(1, $search_result->count() );
+        $this->view_data['id'] = $id;
+
         $view_data = $this->view_data;
 
-        return view('crud.main', compact('view_data'));
+        return view('crud.main', compact('view_data', 'id'));
     }
 
     /**
@@ -89,10 +94,12 @@ class MainPageController extends Controller
         //     $query->where($key, 'like', '%'.$value.'%');
         // }
 
+        //delete_dateにがnullのものを取り出す
         $search_result = $search_result
                             ->whereNull('delete_date')       
                             ->get();
 
+        //日付をYYYY年MM月DD日にの形に変更
         if (empty($search_result)) {
 
             $this->view_data['no_result'] = "No Record Found!";
@@ -101,16 +108,20 @@ class MainPageController extends Controller
 
             foreach ($search_result as $value) {
                 $carbon = $this->dt->parse($value->create_date);
-                $value->create_date = $carbon->format('Y年m月d日');
+                $value->create_date = $carbon->format('Y/m/d');
             }
             $this->view_data['search_result'] = $search_result;
             
         }
-        
+
+        //IDに使う連番を作成
+        $id =range(1, $search_result->count() );
+        $this->view_data['id'] = $id;
+
         $this->view_data['input_val'] = $request->input();
         $view_data = $this->view_data;
 
-        return view('crud.main', compact('view_data'));
+        return view('crud.main', compact('view_data', 'id'));
     }
 
     /**

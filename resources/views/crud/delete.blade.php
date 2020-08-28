@@ -1,5 +1,5 @@
 @extends('layouts.crud')
-@section('title', 'delete Sushi🍣') 
+@section('title', 'delete Ramen🍜') 
 
 
 @section('content')
@@ -8,17 +8,17 @@
 	
    	<div class="container">
 
-       <h1>🍣Sushi Ingredient🍣</a></h1>
+       <h1>🍜Ramen Ingredient🍜</a></h1>
 
 		<div class="card">
 			<div class="card-header">
-                <i class="fa fa-fw fa-plus-circle"></i> <strong>Delete Sushi</strong> 
-                <a href="/my-crud" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-globe"></i> Search Sushi</a>
+                <i class="fa fa-fw fa-plus-circle"></i> <strong>Delete Ramen</strong> 
+                <a href="/my-crud" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-globe"></i> Search Ramen</a>
             </div>
 			<div class="card-body">
 				
 				<div class="col-sm-6">
-					<h5 class="card-title"><span class="text-danger">Once you delete  Sushi data, there is no going back. Please be certain.</span></h5>
+					<h5 class="card-title"><span class="text-danger">Once you delete  Ramen data, there is no going back. Please be certain.</span></h5>
 
                     @if (count($view_data['search_result']))
 				    @foreach ($view_data['search_result'] as $val) 
@@ -63,7 +63,7 @@
 
 						<div class="form-group">
 							<input type="hidden" name="editId" id="editId" value="">
-							<button type="submit" name="submit" value="submit" id="submit" class="btn bg-danger text-white"><i class="fa fa-fw fa-trash"></i>Delete Sushi</button>
+							<button type="submit" name="submit" value="submit" id="submit" class="btn bg-danger text-white"><i class="fa fa-fw fa-trash"></i>Delete Ramen</button>
 						</div>
 					</form>
                     @endforeach

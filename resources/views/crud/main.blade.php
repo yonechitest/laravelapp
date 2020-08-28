@@ -1,5 +1,5 @@
 @extends('layouts.crud')
-@section('title', 'Browse Sushi🍣') 
+@section('title', 'Browse Ramen🍜') 
 
 @section('content')
 
@@ -8,9 +8,10 @@
 @yield('content')
 
    	<div class="container">
-		<h1>🍣Sushi Ingredient🍣</a></h1>
+		<h1>🍜Recommended Ramen🍜<span class="h6">　お気軽に推しのラーメンを登録ください</span></h1>
+
 		<div class="card">
-			<div class="card-header"><i class="fa fa-fw fa-globe"></i> <strong>Browse Sushi</strong> <a href="/my-crud/add" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-plus-circle"></i> Add Sushi</a></div>
+			<div class="card-header"><i class="fa fa-fw fa-globe"></i> <strong>Browse Ramen</strong> <a href="/my-crud/add" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-plus-circle"></i> Add Ramen</a></div>
 			<div class="card-body">
 			<?php
 				if(isset($_REQUEST['msg']) and $_REQUEST['msg']=="rds"){
@@ -24,13 +25,13 @@
 				}
 				?>
 				<div class="col-sm-12">
-					<h5 class="card-title"><i class="fa fa-fw fa-search"></i> Find Sushi</h5>
+					<h5 class="card-title"><i class="fa fa-fw fa-search"></i> Find Ramen</h5>
 					<form action="/my-crud" method="post" autocomplete="off">
 						@csrf
 						<div class="row">
 							<div class="col-sm-2">
 								<div class="form-group">
-									<label>Name</label>
+									<label>Shop Name</label>
 									<!-- 商品名 -->
 									<input type="text" name="name" id="name" class="form-control" 
 									value="{{ isset( $view_data['input_val'] ) ? $view_data['input_val']['name'] : null }}" placeholder="Enter Name">
@@ -38,7 +39,7 @@
 							</div>
 							<div class="col-sm-2">
 								<div class="form-group">
-									<label>Price</label>
+									<label>Average price</label>
 									<!-- 値段 -->
 									<input type="text" name="price" id="price" class="form-control" 
 									value="{{ isset( $view_data['input_val'] ) ? $view_data['input_val']['price'] : null }}" placeholder="Enter Price">
@@ -101,13 +102,14 @@
 						<th class="text-center">Registration date</th>
 						<th class="text-center">Action</th>
 					</tr>
-				</thead>
+				</thead>				
+				@php ($i=0)
 				@if (isset( $view_data['search_result'] ))
-				@foreach ($view_data['search_result'] as $val) 
-				
+				@foreach ($view_data['search_result'] as $val) 				
 				<tbody>
 					<tr>
-						<td>{{$val->id}}</td>
+						<td>{{$id[$i]}}</td>
+						@php (++$i)
 						<td>{{$val->name}}</td>
 						<td>{{$val->price}}</td>
 						<td>{{$val->note}}</td>
