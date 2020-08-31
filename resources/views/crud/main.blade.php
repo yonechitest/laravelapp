@@ -98,6 +98,7 @@
 		<hr>
 		
 		<div>
+			<div class="scroll">
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr class="bg-primary text-white">
@@ -131,6 +132,7 @@
 						<tr><td colspan="6" align="center">No Records Found!</td></tr>
 					@endif
 				</table>
+			</div>
 		</div> <!--/.col-sm-12-->
 		
 	</div>

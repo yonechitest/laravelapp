@@ -22,3 +22,20 @@
   }
   }
 
+//tableにスクロールバー追加
+.scroll table{
+  width:100%;
+  }
+  .scroll{
+  overflow: auto;       /*tableをスクロールさせる*/
+  white-space: nowrap;  /*tableのセル内にある文字の折り返しを禁止*/
+  }
+  .scroll::-webkit-scrollbar{   /*tableにスクロールバーを追加*/
+   height: 5px;
+  }
+  .scroll::-webkit-scrollbar-track{   /*tableにスクロールバーを追加*/
+   background: #F1F1F1;
+  }
+  .scroll::-webkit-scrollbar-thumb {    /*tableにスクロールバーを追加*/
+   background: #BCBCBC;
+  }
