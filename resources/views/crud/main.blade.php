@@ -9,11 +9,6 @@
 
    	<div class="container">
 			<div class=" title"> Recommended shop🍜<div class="sub-title">お気軽に推しのラーメンを登録ください</div></div>
-			
-
-
-
-
 		<div class="card">
 			<div class="card-header"><i class="fa fa-fw fa-globe"></i> <strong>Browse Ramen</strong> <a href="/my-crud/add" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-plus-circle"></i> Add Ramen</a></div>
 			<div class="card-body">
