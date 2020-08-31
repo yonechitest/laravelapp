@@ -8,17 +8,17 @@
   }
   @media (max-width: 375px) { 
   .title {
-  font-size: calc( 100vw / 13 ); 
+  font-size: calc( 100vw / 12 ); 
   // 13 の数字はブラウザ・OS・フォントによって異なると思うので調整する。等幅フォントが使われると崩れる。
   // もし .container が入れ子であるならば、さらに調整する
   }
   }
   .sub-title {
-  font-size: calc( 100vw / 65 ); 
+  font-size: 0.5em; 
   }
   @media (max-width: 375px) { 
   .sub-title {
-  font-size: calc( 100vw / 20 ); 
+    font-size: 0.5em; 
   }
   }
 

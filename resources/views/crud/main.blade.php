@@ -8,10 +8,8 @@
 @yield('content')
 
    	<div class="container">
-	   <div class="row">
-			<div class="cul-auto title"> Recommended shop🍜</div>
-			<div class="cul d-flex align-items-end sub-title">お気軽に推しのラーメンを登録ください</div>
-		</div>
+			<div class=" title"> Recommended shop🍜<div class="sub-title">お気軽に推しのラーメンを登録ください</div></div>
+			
 
 
 
