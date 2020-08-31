@@ -1,5 +1,5 @@
 @extends('layouts.crud')
-@section('title', 'Edit Ramen�') 
+@section('title', 'Edit Ramen🍜') 
 
 
 @section('content')
@@ -8,7 +8,7 @@
 	
    	<div class="container">
 
-       <h1>�Ramen Ingredient�</a></h1>
+       <h1>🍜Ramen Ingredient🍜</a></h1>
 
 		<div class="card">
 			<div class="card-header">

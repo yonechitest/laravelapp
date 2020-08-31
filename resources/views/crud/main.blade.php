@@ -8,7 +8,13 @@
 @yield('content')
 
    	<div class="container">
-		<h1>🍜Recommended Ramen🍜<span class="h6">　お気軽に推しのラーメンを登録ください</span></h1>
+	   <div class="row">
+			<div class="cul-auto title"> Recommended shop🍜</div>
+			<div class="cul d-flex align-items-end sub-title">お気軽に推しのラーメンを登録ください</div>
+		</div>
+
+
+
 
 		<div class="card">
 			<div class="card-header"><i class="fa fa-fw fa-globe"></i> <strong>Browse Ramen</strong> <a href="/my-crud/add" class="float-right btn btn-dark btn-sm"><i class="fa fa-fw fa-plus-circle"></i> Add Ramen</a></div>
@@ -92,39 +98,39 @@
 		<hr>
 		
 		<div>
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr class="bg-primary text-white">
-						<th class="align-middle " >Sr#</th>
-						<th class="align-middle">Name</th>
-						<th class="align-middle">Price</th>
-						<th class="align-middle text-center">Note</th>
-						<th class="text-center">Registration date</th>
-						<th class="text-center">Action</th>
-					</tr>
-				</thead>				
-				@php ($i=0)
-				@if (isset( $view_data['search_result'] ))
-				@foreach ($view_data['search_result'] as $val) 				
-				<tbody>
-					<tr>
-						<td>{{$id[$i]}}</td>
-						@php (++$i)
-						<td>{{$val->name}}</td>
-						<td>{{$val->price}}</td>
-						<td>{{$val->note}}</td>
-						<td align="center">{{$val->create_date}}</td>
-						<td align="center">
-							<a href="{{ action('crud\MainPageController@editProduct', $val->id) }}" class="text-primary"><i class="fa fa-fw fa-edit"></i>Edit</a> |
-							<a href="{{ action('crud\MainPageController@deleteProduct', $val->id) }}" class="text-danger" ><i class="fa fa-fw fa-trash"></i>Delete</a>
-						</td>
-					</tr>
-				</tbody>
-				@endforeach
-				@else
-					<tr><td colspan="6" align="center">No Records Found!</td></tr>
-				@endif
-			</table>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr class="bg-primary text-white">
+							<th class="align-middle " >Sr#</th>
+							<th class="align-middle">Name</th>
+							<th class="align-middle">Price</th>
+							<th class="align-middle text-center">Note</th>
+							<th class="text-center">Registration date</th>
+							<th class="text-center">Action</th>
+						</tr>
+					</thead>				
+					@php ($i=0)
+					@if (isset( $view_data['search_result'] ))
+					@foreach ($view_data['search_result'] as $val) 				
+					<tbody>
+						<tr>
+							<td>{{$id[$i]}}</td>
+							@php (++$i)
+							<td>{{$val->name}}</td>
+							<td>{{$val->price}}</td>
+							<td>{{$val->note}}</td>
+							<td align="center">{{$val->create_date}}</td>
+							<td align="center">
+								<a href="{{ action('crud\MainPageController@editProduct', $val->id) }}" class="text-primary"><i class="fa fa-fw fa-edit"></i>Edit</a> |
+								<a href="{{ action('crud\MainPageController@deleteProduct', $val->id) }}" class="text-danger" ><i class="fa fa-fw fa-trash"></i>Delete</a>
+							</td>
+						</tr>
+					</tbody>
+					@endforeach
+					@else
+						<tr><td colspan="6" align="center">No Records Found!</td></tr>
+					@endif
+				</table>
 		</div> <!--/.col-sm-12-->
 		
 	</div>
